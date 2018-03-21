@@ -28,7 +28,7 @@ import javax.annotation.PreDestroy;
 public class SearchFacadeBean implements SearchFacade{
 	//List<Customer> customers;
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="CustomerPersistence")
 	 private EntityManager em;
 	
 	public SearchFacadeBean() {
