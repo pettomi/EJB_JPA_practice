@@ -17,6 +17,6 @@
     <!-- Drop and re-create the database schema on startup -->
     <property name="hbm2ddl.auto">create</property>
     <!-- MAPPINGS -->
-    <mapping class="mc.hibernatetutorial.model.TestEntity"/>
+    <mapping class="com.company.Customer"/>
   </session-factory>
 </hibernate-configuration>

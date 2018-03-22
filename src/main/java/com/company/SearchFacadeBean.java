@@ -28,7 +28,7 @@ import javax.annotation.PreDestroy;
 public class SearchFacadeBean implements SearchFacade{
 	//List<Customer> customers;
 	
-	@PersistenceContext(unitName="CustomerPersistence")
+	@PersistenceContext
 	 private EntityManager em;
 	
 	public SearchFacadeBean() {
@@ -36,9 +36,19 @@ public class SearchFacadeBean implements SearchFacade{
 
 	@Override
 	public List<String> customerSearch(String customerName) {
-		return em.createNamedQuery("Customer.findByName", Customer.class)
-				.setParameter("name", customerName).getResultList().
-				stream().map(Customer::getName).collect(Collectors.toList());
+		List<String> ls = new ArrayList<String>();
+		try {
+			ls=em.createNamedQuery("Customer.findByName", Customer.class)
+					.setParameter("name", customerName)
+					.getResultList()
+					.stream()
+					.map(Customer::getName)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			System.err.println("SQL ERROR: "+  e.getMessage());
+		}
+		//System.out.println(ls.toString());
+		return ls;
 	}
 	
 	@Override
